@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Edit Profile</h1>
+
+{% if img_obj %}
+<img src={{img_obj.avatar_url|default_if_none:'media/images/th.jfif'}} alt="" style="max-height: 100px">
+{% endif %}
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for fields in form %}
+    <p>{{fields.label_tag}}
+        {{fields}}</p>
+    {% endfor %}
+
+    <p>
+        {% if request.user.is_superuser %}
+        <span>
+            <a href={% url 'change-admin-password' %}>Update Admin Password</a>
+        </span>
+        {% else %}
+        <span>
+            <a href={% url 'update-password' %}>Update Password</a>
+        </span>
+
+        {% endif %}
+    </p>
+    <input type="submit" value="Save">
+</form>
+
+
+{% endblock %}

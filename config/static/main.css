@@ -1,0 +1,36 @@
+body{
+    background-color: black;
+    color: white;
+    font-family:'segoe UI';
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+ }
+
+.sub input {
+    background-color:gray;
+    color: white;
+    width:100px;
+    height:40px;
+    border-radius: 5px;
+}
+
+.sub{
+    display:flex;
+    justify-content:center;
+}
+
+.com{
+    height:40px;
+    width:300px;
+    border-radius: 5px;
+    outline:none;
+    border: solid 1px gray;
+    font-size:1rem; 
+    margin-left:14px;
+}
+
+p{
+   font-size: 19px; 
+}

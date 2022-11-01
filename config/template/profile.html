@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h3>My Profile</h3>
+<h4><a href={% url 'edit-profile' %}>Edit Profile</a></h4>
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if img_obj %}
+<img src={{img_obj.avatar.url|default_if_none:'media/images/th.jfif'}} alt="connect" style="max-height: 100px">
+{% endif %}
+<div>
+    <div>
+        {% if request.user.is_superuser %}
+        <p><strong>Username: </strong>{{request.user.username}}[Admin]</p>
+        <p>Last updated since {{request.user.last_updated}}</p>
+        {% else %}
+        <p><strong>Username: </strong>{{request.user.username}}</p>
+        <p>Last updated since {{request.user.last_updated}}</p>
+        {% endif %}
+        <hr>
+        <p><strong>FullName: </strong>{{request.user.get_full_name}}</p>
+        <p>Last updated since {{request.user.last_updated}}</p>
+        <hr>
+        <p><strong>Email: </strong>{{request.user.email}}</p>
+        <p>Last updated since {{request.user.last_updated}}</p>
+        <hr>
+    </div>
+</div>
+
+{% endblock %}

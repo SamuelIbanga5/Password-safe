@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>Home Page</h1>
+<span>
+    <a href={% url 'logout' %}>Logout</a>
+</span>
+<h3>Hello {{request.user}}</h3>
+<h4><a href={% url 'profile' %}>Profile</a></h4>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<span>
+    <a href={% url 'add-password' %}>Add Password</a>
+</span>
+
+<div>
+    <div>
+        {% for details in password %}
+        <span>
+            <p><strong>Site Name: </strong>{{details.site_name}}</p>
+        </span>
+        <span>
+            <p><strong>Site Link: </strong>{{details.site}}</p>
+        </span>
+        <span>
+            <p><strong>Email: </strong>{{details.email}}</p>
+        </span>
+        <span>
+            <p><strong>Password: </strong>{{details.password|truncatechars:22}}</p>
+        </span>
+        <span>
+            <p><strong>Decrypted Password: </strong>{{decrypted}}</p>
+        </span>
+        <span><a href={% url 'get-password' details.id %}>Decrypt Password</a></span>
+        ||
+        <span><a href={% url 'delete-password' details.id %}>Delete Password</a></span>
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}
